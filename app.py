@@ -76,7 +76,7 @@ def download_file(download_url, output_path, file_name):
                     downloaded += len(data)
                     pbar.update(len(data))
 
-        # verify complete download
+        
         if total_size > 0 and downloaded < total_size:
             print("Incomplete download:", file_name)
             return False
@@ -126,57 +126,6 @@ def show_credits():
         command=credits_window.destroy
     ).pack(pady=10)
 
-# ===== EXTRACT + CLEANUP =====
-# def extract_and_cleanup(folder, do_extract, do_delete):
-#     if not do_extract:
-#         print("User skipped extraction")
-#         return
-
-#     print("Starting extraction...")
-
-#     rar_file = None
-
-#     for file in sorted(os.listdir(folder)):
-#         if re.search(r'part0*1\.rar$', file.lower()):
-#             rar_file = os.path.join(folder, file)
-#             break
-
-#     if not rar_file:
-#         for file in sorted(os.listdir(folder)):
-#             if file.lower().endswith(".rar"):
-#                 rar_file = os.path.join(folder, file)
-#                 break
-
-#     if not rar_file:
-#         print("No archive found")
-#         return
-
-#     proc = subprocess.Popen([
-#         WINRAR_PATH,
-#         "x",
-#         "-y",
-#         "-o+",
-#         rar_file,
-#         folder
-#     ])
-
-#     proc.wait()
-
-#     print("Extraction completed")
-
-#     if not do_delete:
-#         print("User skipped deletion")
-#         return
-
-#     print("Deleting archive files...")
-
-#     for file in os.listdir(folder):
-#         if file.lower().endswith(".rar"):
-#             try:
-#                 os.remove(os.path.join(folder, file))
-#             except Exception as e:
-#                 print("Delete error:", e)
-
 # ===== HELPER_REMOVE_LINK =====
 def remove_link_from_file(link):
     try:
@@ -191,7 +140,7 @@ def remove_link_from_file(link):
     except Exception as e:
         print("Error updating input.txt:", e)
 
-# ===== CORE LOGIC (runs in thread) =====
+# ===== CORE LOGIC  =====
 def run_download():
     try:
         if not os.path.exists(INPUT_FILE):
